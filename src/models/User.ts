@@ -20,6 +20,18 @@ class User {
   @Column('varchar')
   password: string
 
+  @Column('int2')
+  gender: Int8Array
+
+  @Column('int')
+  phone: Int16Array
+
+  @Column({ type: 'varchar', length: 2 })
+  country: string
+
+  @Column({ type: 'varchar', length: 11 })
+  cpf: string
+
   @CreateDateColumn()
   created_at: Date
 
