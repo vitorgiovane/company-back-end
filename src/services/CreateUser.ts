@@ -1,34 +1,52 @@
 import { getRepository } from 'typeorm'
 import { hash } from 'bcryptjs'
 
-import AppError from '../errors/AppError'
-
 import User from '../models/User'
+import { getGenderCode } from '../utils/genders'
+import createUserValidator from '../validations/createUser'
 
 interface Request {
   name: string
   email: string
   password: string
+  gender: 'male' | 'female'
+  phone: string
+  country: string
+  cpf: string
 }
 
 class CreateUser {
-  public async run({ name, email, password }: Request): Promise<User> {
-    const usersRepository = getRepository(User)
-
-    const checkUserExists = await usersRepository.findOne({
-      where: { email }
+  public async run({
+    name,
+    email,
+    password,
+    gender,
+    phone,
+    country,
+    cpf
+  }: Request): Promise<User> {
+    await createUserValidator({
+      name,
+      email,
+      password,
+      gender,
+      phone,
+      country,
+      cpf
     })
 
-    if (checkUserExists) {
-      throw new AppError('Email address already used.')
-    }
+    const usersRepository = getRepository(User)
 
     const hashedPassword = await hash(password, 8)
 
     const user = usersRepository.create({
       name,
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      gender: getGenderCode(gender),
+      phone,
+      country,
+      cpf
     })
     await usersRepository.save(user)
 
