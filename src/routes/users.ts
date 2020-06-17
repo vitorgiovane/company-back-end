@@ -1,6 +1,7 @@
 import { Router } from 'express'
 
 import CreateUserService from '../services/CreateUser'
+import createUserResponse from '../responses/createUser'
 
 const usersRouter = Router()
 
@@ -17,9 +18,10 @@ usersRouter.post('/', async (request, response) => {
     country,
     cpf
   })
-  delete user.password
 
-  return response.json(user)
+  const userResponse = createUserResponse(user)
+
+  return response.json(userResponse)
 })
 
 export default usersRouter
