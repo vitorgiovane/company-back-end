@@ -32,7 +32,7 @@ export default class CreateUsers1592257101160 implements MigrationInterface {
           },
           {
             name: 'phone',
-            type: 'int'
+            type: 'varchar'
           },
           {
             name: 'country',

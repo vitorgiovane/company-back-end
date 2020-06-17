@@ -20,11 +20,11 @@ class User {
   @Column('varchar')
   password: string
 
-  @Column('int2')
-  gender: Int8Array
-
   @Column('int')
-  phone: Int16Array
+  gender: number
+
+  @Column('varchar')
+  phone: string
 
   @Column({ type: 'varchar', length: 2 })
   country: string
