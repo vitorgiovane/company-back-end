@@ -1,5 +1,5 @@
 import { getRepository } from 'typeorm'
-import { getCode } from 'country-list'
+import { getName } from 'country-list'
 import { cpf as cpfValidator } from 'cpf-cnpj-validator'
 
 import User from '../models/User'
@@ -82,16 +82,20 @@ const checkUserExists = async (email: string, cpf: string): Promise<void> => {
     where: [{ email }, { cpf }]
   })
 
-  if (user) {
-    throw new AppError('The user is already registered.')
+  if (!user) return
+
+  if (user.cpf === cpf) {
+    throw new AppError('The user CPF is already registered.')
   }
+
+  throw new AppError('The user e-mail is already registered.')
 }
 
 const checkCountry = (country: string) => {
-  const countryCode = getCode(country)
+  const countryCode = getName(country)
   if (!countryCode) {
     throw new AppError(
-      'The country is invalid. Enter the international name of the country.'
+      'The country is invalid. Enter the ISO Alpha-2 code of the country. Reference: https://www.iso.org/obp/ui/#search/code/'
     )
   }
 }
