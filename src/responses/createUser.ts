@@ -8,6 +8,7 @@ interface Request {
   phone: string
   country: string
   cpf: string
+  newsletter: boolean
 }
 
 interface Response {
@@ -17,6 +18,7 @@ interface Response {
   phone: string
   country: string
   cpf: string
+  newsletter: boolean
 }
 
 const createUser = ({
@@ -26,7 +28,8 @@ const createUser = ({
   gender,
   phone,
   country,
-  cpf
+  cpf,
+  newsletter
 }: Request): Response => {
   const genderName = getGenderName(gender)
 
@@ -36,7 +39,8 @@ const createUser = ({
     gender: genderName,
     phone,
     country,
-    cpf
+    cpf,
+    newsletter
   }
 
   return response

@@ -13,6 +13,7 @@ interface Request {
   phone: string
   country: string
   cpf: string
+  newsletter: boolean
 }
 
 class CreateUser {
@@ -23,7 +24,8 @@ class CreateUser {
     gender,
     phone,
     country,
-    cpf
+    cpf,
+    newsletter
   }: Request): Promise<User> {
     await createUserValidator({
       name,
@@ -46,7 +48,8 @@ class CreateUser {
       gender: getGenderCode(gender),
       phone,
       country,
-      cpf
+      cpf,
+      newsletter
     })
     await usersRepository.save(user)
 

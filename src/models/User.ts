@@ -32,6 +32,9 @@ class User {
   @Column({ type: 'varchar', length: 11 })
   cpf: string
 
+  @Column({ type: 'boolean', default: true })
+  newsletter: boolean
+
   @CreateDateColumn()
   created_at: Date
 

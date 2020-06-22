@@ -6,7 +6,19 @@ import createUserResponse from '../responses/createUser'
 const usersRouter = Router()
 
 usersRouter.post('/', async (request, response) => {
-  const { name, email, password, gender, phone, country, cpf } = request.body
+  const {
+    name,
+    email,
+    password,
+    gender,
+    phone,
+    country,
+    cpf,
+    newsletter = true
+  } = request.body
+
+  const treatedCpf = cpf.replace(/\D/g, '')
+  const treatedCountry = country.toUpperCase()
 
   const createUser = new CreateUserService()
   const user = await createUser.run({
@@ -15,8 +27,9 @@ usersRouter.post('/', async (request, response) => {
     password,
     gender,
     phone,
-    country,
-    cpf
+    country: treatedCountry,
+    cpf: treatedCpf,
+    newsletter
   })
 
   const userResponse = createUserResponse(user)
