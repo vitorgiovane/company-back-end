@@ -1,6 +1,6 @@
 <p align="center">
   <br>
-  <img height="70" alt="Company logo" src="https://res.cloudinary.com/vitorgiovane/image/upload/v1592808191/company/logo-dark_wkt9dz.png" />
+  <img height="150px" alt="Company logo" src="https://res.cloudinary.com/vitorgiovane/image/upload/v1592808191/company/logo-dark_wkt9dz.png" />
   </p>
   <br>
 <h2 align="center">
